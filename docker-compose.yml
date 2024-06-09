@@ -32,13 +32,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # environment:
-    #   - POSTGRES_USER=${POSTGRES_USER}
-    #   - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    #   - PORT=${PORT}
-    #   - NODE_ENV=${NODE_ENV}
-    #   - POSTGRES_HOST=postgres
-    #   - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
     ports:
       - '3001:3000'
     depends_on:
