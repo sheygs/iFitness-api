@@ -1,15 +1,15 @@
-### iFitness Backend
+#### iFitness Backend
 
 > A RESTful service for managing gym memberships and billing. Supports annual and monthly plans, and optional add-on services.
 
-### Overview
+#### Overview
 
 Fitness+ offers gym memberships with various billing structures. Some memberships are annual with a single upfront payment, while others have monthly dues. Additionally, members can subscribe to optional add-on services (personal training sessions, towel rentals) with separate monthly charges. Here's the twist:
 
 ● For new members, the first invoice combines the annual membership fee with the first month's charges for any add-on services they choose.
 ● In subsequent months, only the monthly charges for the add-on services are billed.
 
-### Task
+#### Task
 
 Develop a backend system that implements the following functionalities based on your expertise in these frameworks to build a robust and scalable backend API. Consider Nest.js, Postgresql, well-documented RESTful APIs and you can use your Gmail SMTP server to send out the mails.
 
@@ -65,9 +65,11 @@ Develop a backend system that implements the following functionalities based on 
      - Body: A message reminding the member about the upcoming
        payment, including the membership details (type, due date for annual or month for add-on services), and a link to the relevant invoice. Clearly differentiate between the first month's combined invoice and subsequent month's add-on service invoices in the message.
 
-### Project Structure
+#### Project Structure
 
-### Tech Stack
+Overall, the project is designed to be scalable, maintainable and extensible. The use of a modular monolithic architecture, where all key features are modularized. This can easily spin off to a micro-service that easily promotes code organization and separation of concerns.
+
+#### Tech Stack
 
 - [Node.js](https://nodejs.org/en/download/package-manager)
 - [NestJS](https://nestjs.com/)
@@ -81,9 +83,9 @@ Develop a backend system that implements the following functionalities based on 
 - [Git](https://git-scm.com/downloads)
 - [Postman](https://www.postman.com/downloads/)
 
-### Rename`.env.dev` to `.env` and populate variables
+#### Rename`.env.dev` to `.env` and populate variables
 
-### Installation 📦
+#### Installation 📦
 
 ```bash
    $ git clone https://github.com/sheygs/iFitness-backend.git
@@ -91,18 +93,18 @@ Develop a backend system that implements the following functionalities based on 
    $ yarn
 ```
 
-### Using Docker (Recommended)
+#### Using Docker (Recommended)
 
 - Run `docker-compose up -d`.
 - Open the browser and visit `http://localhost:3001`
 
-### Test
+#### Test
 
 ```bash
 # unit tests
 $ yarn run test
 ```
 
-### API Documentation
+#### API Documentation
 
 - Navigate to `http://localhost:3000/api-docs` on your computer to view the openapi documentation.
