@@ -1,6 +1,7 @@
 #### iFitness Backend
 
-> A RESTful service for managing gym memberships and billing. Supports annual and monthly plans, and optional add-on services.
+> A RESTful service for managing gym memberships and billing.
+> Supports annual and monthly plans, and optional add-on services.
 
 #### Overview
 
