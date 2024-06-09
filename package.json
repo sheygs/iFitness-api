@@ -1,8 +1,8 @@
 {
-  "name": "fitness-billing-system",
+  "name": "ifitness-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "A RESTful service for managing gym memberships and billing. Supports annual and monthly plans, and optional add-on services.",
+  "author": "Olusegun Ekoh (sheygs)",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
