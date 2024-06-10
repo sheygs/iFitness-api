@@ -4,6 +4,6 @@ import { AddOnServicesService } from './add-on-services.service';
 
 @Module({
   controllers: [AddOnServicesController],
-  providers: [AddOnServicesService]
+  providers: [AddOnServicesService],
 })
 export class AddOnServicesModule {}
