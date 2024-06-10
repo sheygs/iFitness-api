@@ -1,18 +1,18 @@
 import { format, transports } from 'winston';
-import { utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import { utilities as nestWinstonUtilities } from 'nest-winston';
 
-const { combine, printf } = format;
+const { combine, printf, timestamp, ms } = format;
 
 const formatOptions = {
   format: combine(
     process.env.NODE_ENV !== 'production' ? format.simple() : format.json(),
 
-    printf((info) => {
+    printf(({ level, message }) => {
       const today = new Date();
       const timestamp = `${
         today.toISOString().split('T')[0]
       } ${today.toLocaleTimeString()}`;
-      return `${timestamp} ${info.level}: ${info.message}`;
+      return `${timestamp} ${level}: ${message}`;
     }),
   ),
 };
@@ -46,10 +46,10 @@ const winstonLogger = {
   ...formatOptions,
   transports: [
     new transports.Console({
-      format: format.combine(
-        format.timestamp(),
-        format.ms(),
-        nestWinstonModuleUtilities.format.nestLike(),
+      format: combine(
+        timestamp(),
+        ms(),
+        nestWinstonUtilities.format.nestLike(),
       ),
       ...options.console,
     }),

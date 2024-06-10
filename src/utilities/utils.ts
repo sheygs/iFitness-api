@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
 import 'dotenv/config';
+import { Injectable } from '@nestjs/common';
 import { Status, SuccessResponse, FailureResponse } from './utils.interface';
 
-@Injectable({})
+@Injectable()
 export class Utilities {
   sucessResponse<T>(
     code: number,
@@ -19,7 +19,7 @@ export class Utilities {
 
   failureResponse(
     code: number,
-    errorMessage: string,
+    message: string,
     path: string,
     stack?: string,
     name?: string,
@@ -29,7 +29,7 @@ export class Utilities {
       status: Status.FAILURE,
       error: {
         ...(name && { name }),
-        message: errorMessage,
+        message,
         path,
         ...(stack && { stack }),
       },

@@ -12,7 +12,7 @@ import {
 
 import { Utilities } from '../utilities/utils';
 
-// ToDo: Setup Sentry
+// Setup Sentry
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   constructor(

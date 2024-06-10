@@ -7,8 +7,7 @@ import { AppService } from './app.service';
 import { UtilitiesModule } from './utilities/utils.module';
 import { winstonLogger } from './utilities/logger';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
-import { HttpExceptionFilter } from './filters/http-exception.filter';
-import { AllExceptionsFilter } from './filters/all-exceptions.filter';
+import { HttpExceptionFilter, AllExceptionsFilter } from './filters';
 
 @Module({
   imports: [
