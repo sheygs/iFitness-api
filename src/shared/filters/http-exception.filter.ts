@@ -29,7 +29,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const stack = process.env.NODE_ENV === 'production' ? null : error.stack;
 
-    const message = error.message;
+    const message = this.getErrorMessage(error);
 
     const path = request ? request.url : null;
 
@@ -44,5 +44,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     this.logger.error(`${JSON.stringify(errResponse)}`);
 
     res.status(status).json(errResponse);
+  }
+
+  private getErrorMessage(exception: HttpException): string | object {
+    const response = exception.getResponse();
+
+    if (typeof response === 'string') {
+      return response;
+    }
+
+    if (typeof response === 'object' && response['message']) {
+      return response['message'];
+    }
+
+    return 'Internal Server Error';
   }
 }

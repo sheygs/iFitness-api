@@ -17,6 +17,8 @@ import {
   HttpExceptionFilter,
   AllExceptionsFilter,
 } from './shared';
+import { MembershipsModule } from './memberships/memberships.module';
+import { AddOnServicesModule } from './add-on-services/add-on-services.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import {
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    MembershipsModule,
+    AddOnServicesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -26,7 +26,7 @@ type FailureResponse = {
   status: Status;
   error: {
     name?: string;
-    message: string;
+    message: string | object;
     stack?: string;
     path: string;
   };

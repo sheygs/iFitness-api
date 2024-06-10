@@ -19,7 +19,7 @@ export class Utils {
 
   failureResponse(
     code: number,
-    message: string,
+    message: string | object,
     path: string,
     stack?: string,
     name?: string,
