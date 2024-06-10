@@ -21,8 +21,8 @@ export class Utilities {
     code: number,
     errorMessage: string,
     path: string,
-    name?: string,
     stack?: string,
+    name?: string,
   ): FailureResponse {
     return {
       code,
@@ -31,7 +31,7 @@ export class Utilities {
         ...(name && { name }),
         message: errorMessage,
         path,
-        ...(process.env.NODE_ENV === 'production' ? null : { stack }),
+        ...(stack && { stack }),
       },
     };
   }

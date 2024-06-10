@@ -30,6 +30,7 @@ export const middleware = (app: INestApplication) => {
       'A RESTful service for managing gym memberships and billing structures.',
     )
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
