@@ -3,11 +3,11 @@ import { Injectable } from '@nestjs/common';
 import { Status, SuccessResponse, FailureResponse } from './utils.interface';
 
 @Injectable()
-export class Utilities {
+export class Utils {
   sucessResponse<T>(
     code: number,
-    data: T,
     message: string,
+    data?: T,
   ): SuccessResponse<T> {
     return {
       code,

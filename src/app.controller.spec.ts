@@ -20,7 +20,7 @@ describe('AppController', () => {
         code: 200,
         status: 'success',
         message: 'okay ✅',
-        data: null,
+        data: {},
       });
     });
   });

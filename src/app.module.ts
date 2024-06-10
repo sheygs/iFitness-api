@@ -1,14 +1,22 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  RequestMethod,
+  NestModule,
+} from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from './shared/database/database.module';
-import { UtilitiesModule } from './shared/utilities/utils.module';
-import { winstonLogger } from './shared/utilities/logger';
-import { MorganMiddleware } from './shared/middlewares/morgan.middleware';
-import { HttpExceptionFilter, AllExceptionsFilter } from './shared/filters';
+import {
+  DatabaseModule,
+  UtilitiesModule,
+  winstonLogger,
+  MorganMiddleware,
+  HttpExceptionFilter,
+  AllExceptionsFilter,
+} from './shared';
 
 @Module({
   imports: [
@@ -34,10 +42,16 @@ import { HttpExceptionFilter, AllExceptionsFilter } from './shared/filters';
     },
   ],
 })
-export class AppModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(MorganMiddleware)
       .forRoutes({ path: '*', method: RequestMethod.ALL });
+    consumer
+      .apply()
+      .forRoutes({ path: 'memberships*', method: RequestMethod.ALL });
+    consumer
+      .apply()
+      .forRoutes({ path: 'add-on-services*', method: RequestMethod.ALL });
   }
 }

@@ -1,20 +1,10 @@
 import { Injectable } from '@nestjs/common';
-
-export interface BaseResponse {
-  message: string;
-  code: number;
-  status: string;
-  data: null;
-}
+import { Utils } from './shared';
 
 @Injectable()
 export class AppService {
-  getHealth(): BaseResponse {
-    return {
-      code: 200,
-      status: 'success',
-      message: 'okay ✅',
-      data: null,
-    };
+  constructor(private readonly utils: Utils) {}
+  getHealth() {
+    return this.utils.sucessResponse<object>(200, 'okay ✅');
   }
 }

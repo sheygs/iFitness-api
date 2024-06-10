@@ -1,14 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService, BaseResponse } from './app.service';
+import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
-@ApiTags('Health-Check')
+@ApiTags('Health Check')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly healthService: AppService) {}
 
   @Get()
-  baseRoute(): BaseResponse {
-    return this.appService.getHealth();
+  baseRoute() {
+    return this.healthService.getHealth();
   }
 }

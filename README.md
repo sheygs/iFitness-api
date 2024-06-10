@@ -6,8 +6,9 @@
 
 Fitness+ offers gym memberships with various billing structures. Some memberships are annual with a single upfront payment, while others have monthly dues. Additionally, members can subscribe to optional add-on services (personal training sessions, towel rentals) with separate monthly charges. Here's the twist:
 
-● For new members, the first invoice combines the annual membership fee with the first month's charges for any add-on services they choose.
-● In subsequent months, only the monthly charges for the add-on services are billed.
+- For new members, the first invoice combines the annual membership fee with the first month's charges for any add-on services they choose.
+
+- In subsequent months, only the monthly charges for the add-on services are billed.
 
 #### Task
 
@@ -37,11 +38,11 @@ Develop a backend system that implements the following functionalities based on 
   - Query the database for memberships with upcoming due dates.
 
   - Differentiate between annual memberships and add-on services,
-    considering the IsFirstMonth flag.
+    considering the `isFirstMonth` flag.
 
   - For new members (first month):
 
-    - Calculate the reminder date (e.g., 7 days before the due date) based on the annual membership due date.
+    - Calculate the reminder date (e.g., `7` days before the due date) based on the annual membership due date.
 
     - Send an email reminder with the membership type, total amount for the combined annual fee and first month's add-on service charges, and a link to the full invoice detailing both.
 
