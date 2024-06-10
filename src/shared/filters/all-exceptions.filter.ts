@@ -10,13 +10,13 @@ import {
   Logger,
 } from '@nestjs/common';
 
-import { Utilities } from '../utilities/utils';
+import { Utils } from '../utilities';
 
-// Setup Sentry
+// setup Sentry
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   constructor(
-    @Inject(Utilities) private utils: Utilities,
+    @Inject(Utils) private utils: Utils,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
@@ -45,7 +45,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const path = request ? request.url : null;
 
-    const response = this.utils.failureResponse(
+    const errResponse = this.utils.failureResponse(
       status,
       message,
       path,
@@ -55,6 +55,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     this.logger.error(`${JSON.stringify(exception)}`);
 
-    res.status(status).json(response);
+    res.status(status).json(errResponse);
   }
 }
