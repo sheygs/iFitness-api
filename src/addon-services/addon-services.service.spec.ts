@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AddOnServicesService } from './add-on-services.service';
+import { AddOnServicesService } from './addon-services.service';
 
 describe('AddOnServicesService', () => {
   let service: AddOnServicesService;

@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('add-on-services')
+@Controller('addon-services')
 export class AddOnServicesController {}

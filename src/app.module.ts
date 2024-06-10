@@ -18,7 +18,7 @@ import {
   AllExceptionsFilter,
 } from './shared';
 import { MembershipsModule } from './memberships/memberships.module';
-import { AddOnServicesModule } from './add-on-services/add-on-services.module';
+import { AddOnServicesModule } from './addon-services/addon-services.module';
 
 @Module({
   imports: [
