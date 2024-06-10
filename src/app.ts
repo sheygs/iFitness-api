@@ -7,10 +7,9 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import * as compression from 'compression';
 
-export const middleware = (app: INestApplication) => {
+export const middlewares = (app: INestApplication) => {
   app.useGlobalPipes(
-    // remove any additional properites
-    // not defined in the DTO
+    // remove additional properites not defined in the DTO
     new ValidationPipe({
       whitelist: true,
     }),

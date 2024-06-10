@@ -4,10 +4,11 @@ import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UtilitiesModule } from './utilities/utils.module';
-import { winstonLogger } from './utilities/logger';
-import { MorganMiddleware } from './middlewares/morgan.middleware';
-import { HttpExceptionFilter, AllExceptionsFilter } from './filters';
+import { DatabaseModule } from './shared/database/database.module';
+import { UtilitiesModule } from './shared/utilities/utils.module';
+import { winstonLogger } from './shared/utilities/logger';
+import { MorganMiddleware } from './shared/middlewares/morgan.middleware';
+import { HttpExceptionFilter, AllExceptionsFilter } from './shared/filters';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { HttpExceptionFilter, AllExceptionsFilter } from './filters';
       ...winstonLogger,
     }),
     UtilitiesModule,
+    DatabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),

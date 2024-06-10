@@ -10,9 +10,9 @@ type NotFoundError = {
   path: string;
 };
 
-interface NotFoundResponse {
+type NotFoundResponse = {
   error: NotFoundError;
-}
+};
 
 interface SuccessResponse<T> {
   code: number;
@@ -21,15 +21,15 @@ interface SuccessResponse<T> {
   data: T | object;
 }
 
-interface FailureResponse {
+type FailureResponse = {
   code: number;
   status: Status;
   error: {
-    name: string;
+    name?: string;
     message: string;
     stack?: string;
     path: string;
   };
-}
+};
 
 export { Status, SuccessResponse, FailureResponse, NotFoundResponse };
