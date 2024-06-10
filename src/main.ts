@@ -3,8 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { WinstonModule } from 'nest-winston';
 import { AppModule } from './app.module';
-import { middleware } from './app';
-import { winstonLogger, exitLog } from './utilities/logger';
+import { middlewares } from './app';
+import { winstonLogger, exitLog } from './shared/utilities/logger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -13,9 +13,9 @@ async function bootstrap() {
     }),
   });
 
-  const port = +process.env.PORT ?? 3000;
+  const port = +process.env.PORT ?? 4000;
 
-  middleware(app);
+  middlewares(app);
 
   process
     .on('SIGINT', () => exitLog(null, 'SIGINT'))
@@ -28,7 +28,9 @@ async function bootstrap() {
   await app.listen(port, () => {
     process.stdout.write(`⚙️ Env: ${process.env.NODE_ENV}\n`);
     process.stdout.write(`⏱ Started on: ${Date.now()}\n`);
-    Logger.verbose(`🚀 iFitness-api listening on http://${hostname()}:${port}`);
+    Logger.verbose(
+      `🚀 ifitness-backend listening on http://${hostname()}:${port}`,
+    );
   });
 }
 
