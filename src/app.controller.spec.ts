@@ -15,11 +15,12 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it('should return "okay"', () => {
       expect(appController.baseRoute()).toEqual({
         code: 200,
         status: 'success',
         message: 'okay ✅',
+        data: null,
       });
     });
   });

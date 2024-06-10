@@ -76,6 +76,7 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 - [TypeScript](https://www.typescriptlang.org/download/)
 - [TypeORM](https://typeorm.io/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 
 #### Application Requirements
 
@@ -107,4 +108,4 @@ $ yarn run test
 
 #### API Documentation
 
-- Navigate to `http://localhost:3000/api-docs` on your computer to view the openapi documentation.
+- Navigate to `http://localhost:3001/api-docs` on your computer to view the openapi documentation.
