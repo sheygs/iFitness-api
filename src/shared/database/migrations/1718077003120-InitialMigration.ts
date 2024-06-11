@@ -4,9 +4,7 @@ export class InitialMigration1718077003120 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('ALTER SEQUENCE memberships_id_seq RESTART WITH 1');
 
-    await queryRunner.query(
-      'ALTER SEQUENCE addon_services_id_seq RESTART WITH 1',
-    );
+    await queryRunner.query('ALTER SEQUENCE addon_services_id_seq RESTART WITH 1');
 
     await queryRunner.query(`
       INSERT INTO "memberships" ("firstName", "lastName", "membershipType", "startDate", "dueDate", "totalAmount", "email", "isFirstMonth", "createdAt", "updatedAt") VALUES
@@ -18,7 +16,7 @@ export class InitialMigration1718077003120 implements MigrationInterface {
       ('Zainab', 'Yusuf', 'Monthly Premium', '2024-08-01', '2024-09-01', 50, 'user6@yopmail.com', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
 
-    // Get the IDs of the inserted memberships
+    // Get IDs of the inserted memberships
     const chineduOkaforMembership = await queryRunner.query(
       `SELECT id FROM "memberships" WHERE "firstName" = 'Chinedu' AND "lastName" = 'Okafor'`,
     );
@@ -31,7 +29,7 @@ export class InitialMigration1718077003120 implements MigrationInterface {
       `SELECT id FROM "memberships" WHERE "firstName" = 'Zainab' AND "lastName" = 'Yusuf'`,
     );
 
-    // Insert data into addon-services table using the retrieved membership IDs
+    // Insert data into "addon_services" table using the retrieved membership IDs
     await queryRunner.query(`
       INSERT INTO "addon_services" ("membershipID", "serviceName", "monthlyAmount", "dueDate", "createdAt", "updatedAt") VALUES
       (${chineduOkaforMembership[0].id}, 'Personal Training', 100.00, '2024-02-01', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

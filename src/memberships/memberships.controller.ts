@@ -11,7 +11,9 @@ import {
 import { MembershipsService, PaginatedMembership } from './memberships.service';
 import { Membership, SuccessResponse, Utils } from '../shared';
 import { CreateMembershipDTO, GetMembershipDTO } from './dtos';
+import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Memberships')
 @Controller('memberships')
 export class MembershipsController {
   constructor(
@@ -21,6 +23,10 @@ export class MembershipsController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post('/')
+  @ApiOperation({ summary: 'Create membership' })
+  @ApiBody({
+    type: CreateMembershipDTO,
+  })
   async createMembership(
     @Body() body: CreateMembershipDTO,
   ): Promise<SuccessResponse<Membership>> {
@@ -39,6 +45,21 @@ export class MembershipsController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/')
+  @ApiOperation({
+    summary: 'Get all memberships',
+  })
+  @ApiQuery({
+    name: 'page',
+    type: String,
+    required: false,
+    description: 'Page Number',
+  })
+  @ApiQuery({
+    name: 'size',
+    type: String,
+    required: false,
+    description: 'Size Per Page',
+  })
   async getMemberships(
     @Query() params: GetMembershipDTO,
   ): Promise<SuccessResponse<PaginatedMembership>> {

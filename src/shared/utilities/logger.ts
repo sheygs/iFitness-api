@@ -9,9 +9,7 @@ const formatOptions = {
 
     printf(({ level, message }) => {
       const today = new Date();
-      const timestamp = `${
-        today.toISOString().split('T')[0]
-      } ${today.toLocaleTimeString()}`;
+      const timestamp = `${today.toISOString().split('T')[0]} ${today.toLocaleTimeString()}`;
       return `${timestamp} ${level}: ${message}`;
     }),
   ),
@@ -46,11 +44,7 @@ const winstonLogger = {
   ...formatOptions,
   transports: [
     new transports.Console({
-      format: combine(
-        timestamp(),
-        ms(),
-        nestWinstonUtilities.format.nestLike(),
-      ),
+      format: combine(timestamp(), ms(), nestWinstonUtilities.format.nestLike()),
       ...options.console,
     }),
 

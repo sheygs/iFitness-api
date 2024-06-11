@@ -28,9 +28,7 @@ describe('MembershipsService', () => {
     }).compile();
 
     service = module.get<MembershipsService>(MembershipsService);
-    repository = module.get<Repository<Membership>>(
-      getRepositoryToken(Membership),
-    );
+    repository = module.get<Repository<Membership>>(getRepositoryToken(Membership));
   });
 
   it('should be defined', () => {

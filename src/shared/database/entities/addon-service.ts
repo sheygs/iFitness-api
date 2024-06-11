@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { Membership } from './membership';
 
-enum ServiceName {
+export enum ServiceName {
   PERSONAL_TRAINING = 'Personal Training',
   TOWEL_RENTALS = 'Towel Rentals',
 }

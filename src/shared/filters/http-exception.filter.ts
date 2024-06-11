@@ -33,13 +33,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const path = request ? request.url : null;
 
-    const errResponse = this.utils.failureResponse(
-      status,
-      message,
-      path,
-      stack,
-      errName,
-    );
+    const errResponse = this.utils.failureResponse(status, message, path, stack, errName);
 
     this.logger.error(`${JSON.stringify(errResponse)}`);
 

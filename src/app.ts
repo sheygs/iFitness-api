@@ -1,8 +1,4 @@
-import {
-  INestApplication,
-  RequestMethod,
-  ValidationPipe,
-} from '@nestjs/common';
+import { INestApplication, RequestMethod, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import * as compression from 'compression';
@@ -25,9 +21,7 @@ export const middlewares = (app: INestApplication) => {
 
   const options = new DocumentBuilder()
     .setTitle('iFitness-backend')
-    .setDescription(
-      'A RESTful service for managing gym memberships and billing structures.',
-    )
+    .setDescription('A RESTful service for managing gym memberships and billing structures.')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
