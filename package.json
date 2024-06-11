@@ -11,6 +11,8 @@
     "prettier:check": "prettier --check \"**/*.+(js|ts|json)\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "seed:build": "yarn build && node ./dist/shared/seeder/seed.js",
+    "seed": "ts-node ./src/shared/seeder/seed.ts",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "docker:up": "docker compose up -d",
@@ -22,6 +24,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "typeorm:c-migration": "yarn typeorm -- migration:create src/shared/database/migrations/$npm_config_name",
+    "typeorm:create-migration": "yarn typeorm -- migration:create src/shared/database/migrations/InitialMigration",
+    "run:migration": "ts-node ./src/shared/scripts/run-migration.ts",
+    "revert:migration": "ts-node ./src/shared/scripts/revert-migration.ts",
     "prepare": "husky"
   },
   "dependencies": {

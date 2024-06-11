@@ -25,11 +25,12 @@ import { AddOnServicesModule } from './addon-services/addon-services.module';
     WinstonModule.forRoot({
       ...winstonLogger,
     }),
-    UtilitiesModule,
     DatabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+
+    UtilitiesModule,
     MembershipsModule,
     AddOnServicesModule,
   ],

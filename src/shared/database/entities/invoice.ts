@@ -12,7 +12,7 @@ import { Membership } from './membership';
 
 @Entity({ name: 'invoices' })
 export class Invoice extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({
