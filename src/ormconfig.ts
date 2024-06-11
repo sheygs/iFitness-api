@@ -10,7 +10,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.POSTGRES_DATABASE,
   // entities: ['dist/shared/database/entities/*.js'],
   entities: [__dirname + '/shared/database/entities/*{.ts,.js}'],
-  synchronize: process.env.NODE_ENV !== 'production',
+  synchronize: process.env.NODE_ENV === 'test',
   migrations: [__dirname + '/shared/database/migrations/*{.ts,.js}'],
   logging: process.env.NODE_ENV !== 'production',
 };

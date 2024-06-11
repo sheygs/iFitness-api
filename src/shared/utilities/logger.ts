@@ -44,7 +44,11 @@ const winstonLogger = {
   ...formatOptions,
   transports: [
     new transports.Console({
-      format: combine(timestamp(), ms(), nestWinstonUtilities.format.nestLike()),
+      format: combine(
+        timestamp(),
+        ms(),
+        nestWinstonUtilities.format.nestLike(),
+      ),
       ...options.console,
     }),
 

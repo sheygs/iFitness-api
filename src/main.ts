@@ -28,7 +28,9 @@ async function bootstrap() {
   await app.listen(port, () => {
     process.stdout.write(`⚙️ Env: ${process.env.NODE_ENV}\n`);
     process.stdout.write(`⏱ Started on: ${Date.now()}\n`);
-    Logger.verbose(`🚀 ifitness-backend listening on http://${hostname()}:${port}`);
+    Logger.verbose(
+      `🚀 ifitness-backend listening on http://${hostname()}:${port}`,
+    );
   });
 }
 

@@ -4,7 +4,9 @@ export class InitialMigration1718077003120 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('ALTER SEQUENCE memberships_id_seq RESTART WITH 1');
 
-    await queryRunner.query('ALTER SEQUENCE addon_services_id_seq RESTART WITH 1');
+    await queryRunner.query(
+      'ALTER SEQUENCE addon_services_id_seq RESTART WITH 1',
+    );
 
     await queryRunner.query(`
       INSERT INTO "memberships" ("firstName", "lastName", "membershipType", "startDate", "dueDate", "totalAmount", "email", "isFirstMonth", "createdAt", "updatedAt") VALUES

@@ -30,16 +30,28 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const name = exception instanceof HttpException ? exception.name : 'Internal Server Error';
+    const name =
+      exception instanceof HttpException
+        ? exception.name
+        : 'Internal Server Error';
 
-    const stack = exception instanceof Error ? exception.stack : 'No stack available';
+    const stack =
+      exception instanceof Error ? exception.stack : 'No stack available';
 
     const message =
-      exception instanceof HttpException ? exception.message : 'Internal Server Error';
+      exception instanceof HttpException
+        ? exception.message
+        : 'Internal Server Error';
 
     const path = request ? request.url : null;
 
-    const errResponse = this.utils.failureResponse(status, message, path, stack, name);
+    const errResponse = this.utils.failureResponse(
+      status,
+      message,
+      path,
+      stack,
+      name,
+    );
 
     this.logger.error(`${JSON.stringify(exception)}`);
 

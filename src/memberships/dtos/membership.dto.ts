@@ -6,6 +6,7 @@ import {
   IsDateString,
   IsBoolean,
   IsOptional,
+  IsBooleanString,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
@@ -69,6 +70,15 @@ export class GetMembershipDTO {
 
   @IsString()
   @IsOptional()
-  @ApiPropertyOptional({ description: 'Size Per Page', default: 10 })
+  @ApiPropertyOptional({ description: 'Size per Page', default: 10 })
   size: string;
+
+  // flag to spool membership records with due date
+  @IsBooleanString()
+  @IsOptional()
+  @ApiPropertyOptional({
+    description: 'Boolean flag to spool membership records',
+    default: false,
+  })
+  withDueDate: boolean;
 }
