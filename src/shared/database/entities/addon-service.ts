@@ -15,9 +15,9 @@ enum ServiceName {
   TOWEL_RENTALS = 'Towel Rentals',
 }
 
-@Entity({ name: 'addon-services' })
+@Entity({ name: 'addon_services' })
 export class AddOnService extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({

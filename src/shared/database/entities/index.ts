@@ -1,3 +1,3 @@
 export * from './membership';
-export * from './add-on-service';
+export * from './addon-service';
 export * from './invoice';
