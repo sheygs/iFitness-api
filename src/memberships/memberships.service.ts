@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
 import { Membership } from '../shared';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMembershipDTO, GetMembershipDTO } from './dtos';
 
 export interface PaginatedMembership {

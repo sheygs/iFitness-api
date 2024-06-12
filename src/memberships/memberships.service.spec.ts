@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { MembershipsService } from './memberships.service';
 import { Membership } from '../shared';
-import { Repository } from 'typeorm';
 
 // Mock the repository
 const mockMembershipRepository = {

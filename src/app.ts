@@ -9,7 +9,7 @@ import * as compression from 'compression';
 
 export const middlewares = (app: INestApplication) => {
   app.useGlobalPipes(
-    // remove additional properites not defined in the DTO
+    // remove properites not defined in the DTO
     new ValidationPipe({
       whitelist: true,
     }),

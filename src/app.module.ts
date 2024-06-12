@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MembershipsModule } from './memberships';
+import { MembershipsModule } from './memberships/memberships.module';
 import { BillingsModule } from './billings';
 import {
   DatabaseModule,

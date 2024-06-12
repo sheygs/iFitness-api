@@ -8,10 +8,10 @@ import {
   Query,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { MembershipsService, PaginatedMembership } from './memberships.service';
-import { Membership, SuccessResponse, Utils } from '../shared';
-import { CreateMembershipDTO, GetMembershipDTO } from './dtos';
 import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { MembershipsService, PaginatedMembership } from './memberships.service';
+import { CreateMembershipDTO, GetMembershipDTO } from './dtos';
+import { Membership, SuccessResponse, Utils } from '../shared';
 
 @ApiTags('Memberships')
 @Controller('memberships')
