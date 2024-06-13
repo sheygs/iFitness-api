@@ -5,7 +5,6 @@ import { MembershipsService } from './memberships.service';
 import { Membership } from '../shared';
 import { RedisModule } from '../shared/redis/redis.module';
 
-// Mock the repository
 const mockMembershipRepository = {
   find: jest.fn(),
   findOne: jest.fn(),
