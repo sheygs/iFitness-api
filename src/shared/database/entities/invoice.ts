@@ -39,7 +39,7 @@ export class Invoice extends BaseEntity {
   @Column({
     name: 'invoiceUID',
     type: 'varchar',
-    length: 40,
+    length: 255,
     nullable: false,
   })
   invoiceUID!: string;

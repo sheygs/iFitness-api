@@ -115,7 +115,8 @@ export class InitialMigration1718122739709 implements MigrationInterface {
       `SELECT id FROM "memberships" WHERE "firstName" = 'Ekene' AND "lastName" = 'Anyanwu'`,
     );
 
-    // Insert data into "addon_services" table using the retrieved membership IDs
+    // seed data into "addon_services" table
+    // using retrieved IDs
     await queryRunner.query(`
       INSERT INTO "addon_services" ("membershipID", "serviceName", "monthlyAmount", "dueDate", "createdAt", "updatedAt") VALUES
       (${chineduOkaforMembership[0].id}, 'Personal Training', 100.00, '2024-02-01', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -136,7 +137,7 @@ export class InitialMigration1718122739709 implements MigrationInterface {
       (${ekeneAnyanwuMembership[0].id}, 'Towel Rentals', 20, '2024-08-01', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
 
-    // Insert data into "invoices" table
+    // seed data into "invoices" table
     await queryRunner.query(`
       INSERT INTO "invoices" ("membershipID", "invoiceDateTime", "totalAmount", "invoiceUID")
       VALUES
