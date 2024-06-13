@@ -11,7 +11,7 @@ export class BillingsService {
     private queueService: QueueService,
   ) {}
 
-  @Cron(CronExpression.EVERY_30_SECONDS)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async sendReminderJob() {
     const currentDate = this.membershipService.getCurrentDate();
 
@@ -109,21 +109,21 @@ export class BillingsService {
 
   private membershipEmailContent(
     membership: Membership,
-    totalAmount: number,
+    amount: number,
     link: string,
   ): string {
     return `
       Dear ${membership.firstName},
       Your ${membership.membershipType} membership is due soon.
-      Total Amount: ${totalAmount}
+      Total Amount: ${amount}
       Invoice Link: ${link}
     `;
   }
 
   private addOnEmailContent(addOn: AddOnService, link: string): string {
     return `
-      Your ${addOn.serviceName} service is due this month.
-      Amount: ${addOn.monthlyAmount}.
+      Your ${addOn?.serviceName} service is due this month.
+      Amount: ${addOn?.monthlyAmount}.
       Invoice Link: ${link}
     `;
   }

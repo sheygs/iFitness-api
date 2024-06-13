@@ -25,23 +25,29 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  # temporary shut down api-service
-  # api-service:
-  #   container_name: api-service
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     - POSTGRES_USER=${POSTGRES_USER}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-  #     - PORT=3000
-  #     - NODE_ENV=${NODE_ENV}
-  #     - POSTGRES_HOST=postgres
-  #     - POSTGRES_DATABASE=${POSTGRES_DATABASE}
-  #   ports:
-  #     - '3001:3000'
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #     redis:
-  #       condition: service_started
+  api-service:
+    container_name: api-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PORT=3000
+      - NODE_ENV=${NODE_ENV}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=redis
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - EMAIL_FROM=${EMAIL_FROM}
+    ports:
+      - '3001:3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
