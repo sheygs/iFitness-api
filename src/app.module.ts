@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import {
   MiddlewareConsumer,
   Module,
@@ -7,8 +8,13 @@ import {
 import { APP_FILTER } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MembershipsModule } from './memberships/memberships.module';
+import { BillingsModule } from './billings';
+import { QueueModule } from './shared/queues/queue.module';
+
 import {
   DatabaseModule,
   UtilitiesModule,
@@ -17,11 +23,23 @@ import {
   HttpExceptionFilter,
   AllExceptionsFilter,
 } from './shared';
-import { MembershipsModule } from './memberships/memberships.module';
-import { AddOnServicesModule } from './addon-services/addon-services.module';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST,
+        port: +process.env.REDIS_PORT,
+      },
+      defaultJobOptions: {
+        attempts: 3,
+        backoff: 3000,
+        removeOnComplete: true,
+      },
+    }),
+    QueueModule,
+    ScheduleModule.forRoot(),
     WinstonModule.forRoot({
       ...winstonLogger,
     }),
@@ -32,7 +50,7 @@ import { AddOnServicesModule } from './addon-services/addon-services.module';
 
     UtilitiesModule,
     MembershipsModule,
-    AddOnServicesModule,
+    BillingsModule,
   ],
   controllers: [AppController],
   providers: [

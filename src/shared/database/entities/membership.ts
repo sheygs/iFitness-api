@@ -9,13 +9,8 @@ import {
 } from 'typeorm';
 
 import { AddOnService } from './addon-service';
-
-enum MembershipType {
-  ANNUAL_BASIC = 'Annual Basic',
-  ANNUAL_PREMIUM = 'Annual Premium',
-  MONTHLY_BASIC = 'Monthly Basic',
-  MONTHLY_PREMIUM = 'Monthly Premium',
-}
+import { MembershipType } from '../../../memberships/dtos';
+import { Invoice } from './invoice';
 
 @Entity({ name: 'memberships' })
 export class Membership extends BaseEntity {
@@ -99,4 +94,7 @@ export class Membership extends BaseEntity {
 
   @OneToMany(() => AddOnService, (addOnService) => addOnService.membership)
   addOnServices!: AddOnService[];
+
+  @OneToMany(() => Invoice, (invoice) => invoice.membership)
+  invoices!: Invoice[];
 }

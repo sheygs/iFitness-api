@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { Membership } from '../shared';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MoreThanOrEqual, Repository } from 'typeorm';
+import { Membership } from '../shared';
 import { CreateMembershipDTO, GetMembershipDTO } from './dtos';
 
 export interface PaginatedMembership {
@@ -29,7 +29,9 @@ export class MembershipsService {
   }
 
   async getMemberships(params: GetMembershipDTO): Promise<PaginatedMembership> {
-    const { page, size } = params;
+    const { page, size, withDueDate } = params;
+
+    const currentDate = this.getCurrentDate();
 
     const [memberships, total] = await this.membershipRepo.findAndCount({
       ...(page && { skip: (+page - 1) * +size }),
@@ -37,7 +39,14 @@ export class MembershipsService {
 
       relations: {
         addOnServices: true,
+        invoices: true,
       },
+
+      ...(withDueDate && {
+        where: {
+          dueDate: MoreThanOrEqual(currentDate),
+        },
+      }),
     });
 
     const totalPages = +size ? Math.ceil(total / +size) : 0;
@@ -49,5 +58,14 @@ export class MembershipsService {
       result: memberships,
       totalPages,
     };
+  }
+
+  public getCurrentDate(): Date {
+    const now = new Date();
+
+    // set time to beginning of the day
+    now.setHours(0, 0, 0, 0);
+
+    return now;
   }
 }
