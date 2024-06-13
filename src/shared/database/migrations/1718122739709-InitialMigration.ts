@@ -8,6 +8,8 @@ export class InitialMigration1718122739709 implements MigrationInterface {
       'ALTER SEQUENCE addon_services_id_seq RESTART WITH 1',
     );
 
+    await queryRunner.query('ALTER SEQUENCE invoices_id_seq RESTART WITH 1');
+
     await queryRunner.query(`
       INSERT INTO "memberships" ("firstName", "lastName", "membershipType", "startDate", "dueDate", "totalAmount", "email", "isFirstMonth", "createdAt", "updatedAt") VALUES
       ('Chinedu', 'Okafor', 'Annual Basic', '2024-01-01', '2025-01-01', 500, 'user1@yopmail.com', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

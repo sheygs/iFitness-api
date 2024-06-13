@@ -31,10 +31,7 @@ export class MembershipsService {
   async getMemberships(params: GetMembershipDTO): Promise<PaginatedMembership> {
     const { page, size, withDueDate } = params;
 
-    const nowDate = new Date();
-
-    // set time to beginning of the day
-    nowDate.setHours(0, 0, 0, 0);
+    const currentDate = this.getCurrentDate();
 
     const [memberships, total] = await this.membershipRepo.findAndCount({
       ...(page && { skip: (+page - 1) * +size }),
@@ -47,7 +44,7 @@ export class MembershipsService {
 
       ...(withDueDate && {
         where: {
-          dueDate: MoreThanOrEqual(nowDate),
+          dueDate: MoreThanOrEqual(currentDate),
         },
       }),
     });
@@ -61,5 +58,14 @@ export class MembershipsService {
       result: memberships,
       totalPages,
     };
+  }
+
+  public getCurrentDate(): Date {
+    const now = new Date();
+
+    // set time to beginning of the day
+    now.setHours(0, 0, 0, 0);
+
+    return now;
   }
 }
