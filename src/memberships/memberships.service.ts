@@ -42,6 +42,7 @@ export class MembershipsService {
 
       relations: {
         addOnServices: true,
+        invoices: true,
       },
 
       ...(withDueDate && {

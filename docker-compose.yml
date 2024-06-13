@@ -25,23 +25,23 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-  api-service:
-    container_name: api-service
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - PORT=3000
-      - NODE_ENV=${NODE_ENV}
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
-    ports:
-      - '3001:3000'
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_started
+  # temporary shut down api-service
+  # api-service:
+  #   container_name: api-service
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #     - PORT=3000
+  #     - NODE_ENV=${NODE_ENV}
+  #     - POSTGRES_HOST=postgres
+  #     - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+  #   ports:
+  #     - '3001:3000'
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_started

@@ -135,10 +135,57 @@ export class InitialMigration1718122739709 implements MigrationInterface {
       (${chukwumaObinnaMembership[0].id}, 'Personal Training', 100, '2024-05-15', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
       (${ekeneAnyanwuMembership[0].id}, 'Towel Rentals', 20, '2024-08-01', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
+
+    // Insert data into "invoices" table
+    await queryRunner.query(`
+      INSERT INTO "invoices" ("membershipID", "invoiceDateTime", "totalAmount", "invoiceUID")
+      VALUES
+      (1, null, null, 'invoices1'),
+      (2, null, null, 'invoices2'),
+      (3, null, null, 'invoices3'),
+      (4, null, null, 'invoices4'),
+      (5, null, null, 'invoices5'),
+      (6, null, null, 'invoices6'),
+      (7, null, null, 'invoices7'),
+      (8, null, null, 'invoices8'),
+      (9, null, null, 'invoices9'),
+      (10, null, null, 'invoices10'),
+      (11, null, null, 'invoices11'),
+      (12, null, null, 'invoices12'),
+      (13, null, null, 'invoices13'),
+      (14, null, null, 'invoices14'),
+      (15, null, null, 'invoices15'),
+      (16, null, null, 'invoices16'),
+      (17, null, null, 'invoices17'),
+      (18, null, null, 'invoices18'),
+      (19, null, null, 'invoices19'),
+      (20, null, null, 'invoices20'),
+      (21, null, null, 'invoices21'),
+      (22, null, null, 'invoices22'),
+      (23, null, null, 'invoices23'),
+      (24, null, null, 'invoices24'),
+      (25, null, null, 'invoices25'),
+      (26, null, null, 'invoices26'),
+      (27, null, null, 'invoices27'),
+      (28, null, null, 'invoices28'),
+      (29, null, null, 'invoices29'),
+      (30, null, null, 'invoices30'),
+      (31, null, null, 'invoices31'),
+      (32, null, null, 'invoices32'),
+      (33, null, null, 'invoices33'),
+      (34, null, null, 'invoices34'),
+      (35, null, null, 'invoices35'),
+      (36, null, null, 'invoices36'),
+      (37, null, null, 'invoices37'),
+      (38, null, null, 'invoices38'),
+      (39, null, null, 'invoices39'),
+      (40, null, null, 'invoices40');
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`DELETE FROM "addon_services"`);
     await queryRunner.query(`DELETE FROM "memberships"`);
+    await queryRunner.query(`DELETE FROM "invoices"`);
   }
 }

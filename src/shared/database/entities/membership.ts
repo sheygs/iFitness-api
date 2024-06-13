@@ -10,6 +10,7 @@ import {
 
 import { AddOnService } from './addon-service';
 import { MembershipType } from '../../../memberships/dtos';
+import { Invoice } from './invoice';
 
 @Entity({ name: 'memberships' })
 export class Membership extends BaseEntity {
@@ -93,4 +94,7 @@ export class Membership extends BaseEntity {
 
   @OneToMany(() => AddOnService, (addOnService) => addOnService.membership)
   addOnServices!: AddOnService[];
+
+  @OneToMany(() => Invoice, (invoice) => invoice.membership)
+  invoices!: Invoice[];
 }
