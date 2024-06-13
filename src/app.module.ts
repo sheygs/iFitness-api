@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import {
   MiddlewareConsumer,
   Module,
@@ -12,6 +13,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MembershipsModule } from './memberships/memberships.module';
 import { BillingsModule } from './billings';
+import { QueueModule } from './shared/queues/queue.module';
+
 import {
   DatabaseModule,
   UtilitiesModule,
@@ -20,9 +23,22 @@ import {
   HttpExceptionFilter,
   AllExceptionsFilter,
 } from './shared';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST,
+        port: +process.env.REDIS_PORT,
+      },
+      defaultJobOptions: {
+        attempts: 3,
+        backoff: 3000,
+        removeOnComplete: true,
+      },
+    }),
+    QueueModule,
     ScheduleModule.forRoot(),
     WinstonModule.forRoot({
       ...winstonLogger,

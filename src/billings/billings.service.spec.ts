@@ -1,12 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BillingsService } from './billings.service';
 import { MembershipsService } from '../memberships/memberships.service';
+import { QueueModule } from '../shared/queues/queue.module';
+import { QueueService } from '../shared/queues/queue.service';
 
 describe('BillingsService', () => {
   let service: BillingsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [QueueModule],
       providers: [
         BillingsService,
         {
@@ -15,6 +18,18 @@ describe('BillingsService', () => {
             getMemberships: jest.fn().mockResolvedValue([]),
           },
         },
+
+        {
+          provide: QueueService,
+          useValue: {},
+        },
+
+        // {
+        //   provide: QueueService,
+        //   useValue: {
+        //     addEmailJob: jest.fn().mockResolvedValue(),
+        //   },
+        // },
       ],
     }).compile();
 

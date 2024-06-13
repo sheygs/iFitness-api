@@ -5,10 +5,10 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller()
 @ApiTags('Health Check')
 export class AppController {
-  constructor(private readonly healthService: AppService) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   baseRoute() {
-    return this.healthService.getHealth();
+    return this.appService.getHealth();
   }
 }

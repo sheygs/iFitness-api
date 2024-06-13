@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { MembershipsService } from '../memberships/memberships.service';
+import { QueueService } from '../shared/queues/queue.service';
 import { AddOnService, Membership } from '../shared';
 
 @Injectable()
 export class BillingsService {
-  constructor(private membershipService: MembershipsService) {}
+  constructor(
+    private membershipService: MembershipsService,
+    private queueService: QueueService,
+  ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  @Cron(CronExpression.EVERY_30_SECONDS)
   async sendReminderJob() {
     const currentDate = this.membershipService.getCurrentDate();
 
@@ -40,30 +44,29 @@ export class BillingsService {
     membership: Membership,
     currentDate: Date,
   ): Promise<void> {
-    const reminderDate = this.calculateReminderDate(
-      new Date(membership.dueDate),
-      7,
-    );
+    const { dueDate, membershipType, email, totalAmount } = membership;
+
+    const reminderDate = this.calculateReminderDate(new Date(dueDate), 7);
 
     if (currentDate.getTime() === reminderDate.getTime()) {
-      const totalAddOns = Number(this.getMembershipAddOnsCost(membership));
+      const sumAddOns = Number(this.getMembershipTotalAddOns(membership));
 
-      const sum = Number(membership.totalAmount) + totalAddOns;
+      const total = Number(totalAmount) + sumAddOns;
 
-      // console.log({ totalAddOns, type: typeof totalAddOns, sum });
+      const link = this.generateInvoiceLink(membership, total);
 
-      const link = this.generateInvoiceLink(membership, sum);
+      const text = this.membershipEmailContent(membership, total, link);
 
-      const text = this.membershipEmailContent(membership, sum, link);
-
-      console.log({ text, link });
-
-      // send mail here 🔥
+      await this.queueService.addEmailJob({
+        text,
+        email,
+        membershipType,
+      });
     }
   }
 
-  private getMembershipAddOnsCost(membership: Membership): number {
-    return membership.addOnServices?.reduce(
+  private getMembershipTotalAddOns(memship: Membership): number {
+    return memship.addOnServices?.reduce(
       (sum, addOn) => sum + addOn?.monthlyAmount,
       0,
     );
@@ -73,7 +76,9 @@ export class BillingsService {
     membership: Membership,
     currentDate: Date,
   ): Promise<void> {
-    for (const addOn of membership.addOnServices) {
+    const { email, membershipType, addOnServices } = membership;
+
+    for (const addOn of addOnServices) {
       const addOnDueDate = new Date(addOn.dueDate);
 
       const isEqualMonth = addOnDueDate.getMonth() === currentDate.getMonth();
@@ -86,9 +91,11 @@ export class BillingsService {
 
         const text = this.addOnEmailContent(addOn, link);
 
-        console.log({ text, link });
-
-        // send mail here 🔥
+        await this.queueService.addEmailJob({
+          text,
+          email,
+          membershipType,
+        });
       }
     }
   }
