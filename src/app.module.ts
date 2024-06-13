@@ -5,14 +5,15 @@ import {
   RequestMethod,
   NestModule,
 } from '@nestjs/common';
+
 import { APP_FILTER } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MembershipsModule } from './memberships/memberships.module';
 import { BillingsModule } from './billings';
+import { MembershipsModule } from './memberships/memberships.module';
 import { QueueModule } from './shared/queues/queue.module';
 
 import {
@@ -27,6 +28,9 @@ import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     BullModule.forRoot({
       redis: {
         host: process.env.REDIS_HOST,
@@ -38,16 +42,13 @@ import { BullModule } from '@nestjs/bull';
         removeOnComplete: true,
       },
     }),
-    QueueModule,
+
     ScheduleModule.forRoot(),
     WinstonModule.forRoot({
       ...winstonLogger,
     }),
     DatabaseModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
+    QueueModule,
     UtilitiesModule,
     MembershipsModule,
     BillingsModule,
