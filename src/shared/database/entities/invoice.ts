@@ -36,6 +36,7 @@ export class Invoice extends BaseEntity {
   })
   totalAmount!: number;
 
+  // invoice link: https://example.com/invoices/4 -> invoices4
   @Column({
     name: 'invoiceUID',
     type: 'varchar',
