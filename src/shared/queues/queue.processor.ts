@@ -27,11 +27,9 @@ export class QueueProcessor {
       );
 
       this.logger.log(JSON.stringify(response));
-
-      // handle error case
     } catch (error) {
       this.logger.error(`failed to send email to: ${email}`, error);
-      // re-throw error to trigger retry attempts
+      // error thrown to trigger retry attempts
       throw error;
     }
   }

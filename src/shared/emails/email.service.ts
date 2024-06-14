@@ -28,8 +28,6 @@ export class EmailService {
       };
 
       return await this.transporter.sendMail(mailOptions);
-
-      // handle failed email here
     } catch (error) {
       throw error;
     }
