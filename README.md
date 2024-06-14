@@ -87,7 +87,7 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 - [Postman](https://www.postman.com/downloads/)
 - [Mailtrap](https://mailtrap.io/) or any free email delivery platform to manage email infrastructure.
 
-#### Rename`.env.dev` to `.env` and populate variables
+#### Rename`.env.dev` to `.env` and populate variables only with `****`
 
 #### Installation 📦
 

@@ -11,8 +11,6 @@
     "prettier:check": "prettier --check \"**/*.+(js|ts|json)\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "seed:build": "yarn build && node ./dist/shared/seeder/seed.js",
-    "seed": "ts-node ./src/shared/seeder/seed.ts",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "docker:up": "docker compose up -d",
