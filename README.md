@@ -95,6 +95,10 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
    $ yarn
 ```
 
+### Seeding
+
+- Run `yarn run:migration` to seed tables with sample data
+
 #### Using Docker (Recommended)
 
 - Run `docker-compose up -d`.
