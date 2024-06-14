@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { MembershipsService } from '../memberships/memberships.service';
 import { QueueService } from '../shared/queues/queue.service';
+import { InvoicesService } from '../invoices/invoices.service';
 import { AddOnService, Membership } from '../shared';
 
 @Injectable()
@@ -9,9 +10,10 @@ export class BillingsService {
   constructor(
     private membershipService: MembershipsService,
     private queueService: QueueService,
+    private invoiceService: InvoicesService,
   ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  @Cron(CronExpression.EVERY_30_SECONDS)
   async sendReminderJob() {
     const currentDate = this.membershipService.getCurrentDate();
 
@@ -57,6 +59,8 @@ export class BillingsService {
 
       const text = this.membershipEmailContent(membership, total, link);
 
+      await this.invoiceService.updateInvoice(membership.id, total);
+
       await this.queueService.addEmailJob({
         text,
         email,
@@ -90,6 +94,11 @@ export class BillingsService {
         const link = this.generateInvoiceLink(addOn, addOn.monthlyAmount);
 
         const text = this.addOnEmailContent(addOn, link);
+
+        await this.invoiceService.updateInvoice(
+          membership.id,
+          addOn.monthlyAmount,
+        );
 
         await this.queueService.addEmailJob({
           text,

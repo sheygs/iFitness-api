@@ -10,11 +10,13 @@ import { APP_FILTER } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BullModule } from '@nestjs/bull';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BillingsModule } from './billings';
 import { MembershipsModule } from './memberships/memberships.module';
 import { QueueModule } from './shared/queues/queue.module';
+import { InvoicesModule } from './invoices/invoices.module';
 
 import {
   DatabaseModule,
@@ -24,7 +26,6 @@ import {
   HttpExceptionFilter,
   AllExceptionsFilter,
 } from './shared';
-import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { BullModule } from '@nestjs/bull';
     UtilitiesModule,
     MembershipsModule,
     BillingsModule,
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [

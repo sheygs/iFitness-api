@@ -77,7 +77,8 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 - [TypeScript](https://www.typescriptlang.org/download/)
 - [TypeORM](https://typeorm.io/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Redis](https://redis.io/)
+- [Redis](https://redis.io/) for caching.
+- [Bull](https://github.com/OptimalBits/bull) for handling email queue notifications
 
 #### Application Requirements
 
@@ -94,6 +95,10 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
    $ cd iFitness-backend
    $ yarn
 ```
+
+### Seeding
+
+- Run `yarn run:migration` to seed tables with sample data
 
 #### Using Docker (Recommended)
 

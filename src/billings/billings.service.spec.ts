@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BillingsService } from './billings.service';
 import { MembershipsService } from '../memberships/memberships.service';
 import { QueueModule } from '../shared/queues/queue.module';
+import { InvoicesService } from '../invoices/invoices.service';
 
 describe('BillingsService', () => {
   let service: BillingsService;
@@ -15,6 +16,12 @@ describe('BillingsService', () => {
           provide: MembershipsService,
           useValue: {
             getMemberships: jest.fn().mockResolvedValue([]),
+          },
+        },
+        {
+          provide: InvoicesService,
+          useValue: {
+            updateInvoice: jest.fn().mockResolvedValue(undefined),
           },
         },
       ],
