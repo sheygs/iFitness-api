@@ -85,6 +85,7 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [Git](https://git-scm.com/downloads)
 - [Postman](https://www.postman.com/downloads/)
+- [Mailtrap](https://mailtrap.io/) or any free email delivery platform to manage email infrastructure.
 
 #### Rename`.env.dev` to `.env` and populate variables
 
