@@ -13,7 +13,7 @@ export class BillingsService {
     private invoiceService: InvoicesService,
   ) {}
 
-  @Cron(CronExpression.EVERY_30_SECONDS)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async sendReminderJob() {
     const currentDate = this.membershipService.getCurrentDate();
 
