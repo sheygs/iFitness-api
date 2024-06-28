@@ -126,7 +126,7 @@ export class BillingsService {
     membership: Membership | AddOnService,
     amount: number,
   ): string {
-    const invoiceUrl = process.env.BASE_INVOICE_URL;
+    const invoiceUrl = 'https://example.com/invoice';
     return `${invoiceUrl}/${membership.id}?totalAmount=${amount}`;
   }
 
