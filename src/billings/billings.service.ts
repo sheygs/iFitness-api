@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { MembershipsService } from '../memberships/memberships.service';
 import { QueueService } from '../shared/queues/queue.service';
@@ -24,12 +24,25 @@ export class BillingsService {
     });
 
     for (const membership of memberships.result) {
-      if (membership.isFirstMonth) {
-        await this.handleNewMemberReminder(membership, currentDate);
+      // send mails to first month annual-memberships
+      if (this.isMembershipFirstMonth(membership)) {
+        if (this.isMembershipAnnual(membership)) {
+          await this.handleNewMemberReminder(membership, currentDate);
+        }
       } else {
+        // send mails to monthly memberships
         await this.handleExistingMemberReminder(membership, currentDate);
       }
     }
+  }
+
+  private isMembershipFirstMonth(membership: Membership): boolean {
+    return membership?.isFirstMonth;
+  }
+
+  private isMembershipAnnual(membership: Membership): boolean {
+    const PREFIX = 'Annual';
+    return membership.membershipType?.includes(PREFIX);
   }
 
   private calculateReminderDate(dueDate: Date, daysBefore: number): Date {
@@ -113,7 +126,12 @@ export class BillingsService {
     membership: Membership | AddOnService,
     amount: number,
   ): string {
-    return `https://example.com/invoice/${membership.id}?totalAmount=${amount}`;
+    const invoiceUrl = process.env.BASE_INVOICE_URL;
+
+    if (!invoiceUrl) {
+      throw new UnprocessableEntityException('invoice url link required');
+    }
+    return `${invoiceUrl}/${membership.id}?totalAmount=${amount}`;
   }
 
   private membershipEmailContent(
