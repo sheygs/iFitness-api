@@ -1,4 +1,4 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { MembershipsService } from '../memberships/memberships.service';
 import { QueueService } from '../shared/queues/queue.service';
@@ -127,10 +127,6 @@ export class BillingsService {
     amount: number,
   ): string {
     const invoiceUrl = process.env.BASE_INVOICE_URL;
-
-    if (!invoiceUrl) {
-      throw new UnprocessableEntityException('invoice url link required');
-    }
     return `${invoiceUrl}/${membership.id}?totalAmount=${amount}`;
   }
 
