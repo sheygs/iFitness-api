@@ -1,4 +1,4 @@
-#### iFitness Backend
+#### iFitness
 
 > A RESTful service for managing gym memberships and billing structures.
 
@@ -92,8 +92,8 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 #### Installation 📦
 
 ```bash
-   $ git clone https://github.com/sheygs/iFitness-backend.git
-   $ cd iFitness-backend
+   $ git clone https://github.com/sheygs/iFitness-api.git
+   $ cd iFitness-api
    $ yarn
 ```
 
